@@ -1,4 +1,4 @@
-{% extends "templates/base-fragment.html" %}
+{% extends "base-fragment.html" %}
 {% block content %}
 
 {#
@@ -38,7 +38,7 @@
 </div>
 
 {% for question in questions %}
-{% include 'templates/question-fragment.html' %}
+{% include 'question-fragment.html' %}
 {% else %}
 <div class="alert-message block-message error">
 	<h3>Sorry, but the princess is in another castle...</h3>
