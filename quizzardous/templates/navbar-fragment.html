@@ -1,0 +1,32 @@
+<div class="topbar">
+	<div class="topbar-inner">
+		<div class="container">
+			<a href="/" class="brand">Quizzardous!</a>
+			<ul class="nav">
+				<li class="active">
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/">Competition</a>
+				</li>
+				<li>
+					<a href="/rankings">Rankings</a>
+				</li>
+			</ul>
+			<ul class="nav secondary-nav">
+				{% if user %}
+				<li>
+					{{ user|user_link }}
+				</li>
+				{% else %}
+				<li>
+					<a href="/login">Login</a>
+				</li>
+				<li>
+					<a href="#">Browse</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
