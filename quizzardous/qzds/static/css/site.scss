@@ -1,0 +1,56 @@
+/* mixins */
+@mixin border-radius($r1, $r2, $r3, $r4) {
+	border-radius: $r1 $r2 $r3 $r4;
+	-moz-border-radius: $r1 $r2 $r3 $r4;
+	-o-border-radius: $r1 $r2 $r3 $r4;
+	-webkit-border-radius: $r1 $r2 $r3 $r4;
+}
+
+body {
+	padding-top: 56px;
+	background: url(../img/background.png);
+}
+
+.navbar .brand, .brand {
+	font-family: 'Pacifico', script;
+	font-weight: normal;
+	-moz-transition: color 0.2s ease;
+}
+
+footer.footer {
+	padding: 8px;
+	margin-top: 16px;
+	border-top: 1px solid rgb(229, 229, 229);
+}
+
+
+
+div.toolbar {
+	background-image: -webkit-linear-gradient(top, #555, #333);
+	@include border-radius(4px, 4px, 4px, 4px);
+}
+
+div.toolbar-inner {
+	margin: 4px;
+}
+
+div.content {
+	@include border-radius(4px, 4px, 4px, 4px);
+	padding: 0px 0px 40px 0px;
+	background: #fafafa;
+}
+
+.ad {
+	background: white;
+	padding: 10px 0px 40px 0px;
+	box-shadow: 0px 0px 4px #999;
+
+}
+
+article {
+	display: block;
+	padding: 16px 0px 16px 0px;
+}
+
+article div.question-content {
+}
