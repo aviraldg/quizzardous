@@ -8,4 +8,4 @@ def questions(request):
 		'questions': Question.objects.all(),
 	}
 
-	return render_to_response('index.html', context)
+	return render_to_response('questions.html', context)
