@@ -1,0 +1,53 @@
+{% load static from staticfiles %}
+<!doctype html>
+<html lang="en-GB">
+	<head>
+		<title>{% block title %}Quizzardous!{% endblock %}</title>
+		<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/site.css" %}">
+		<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+		{% block extrahead %}{% endblock %}
+	</head>
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a href="/" class="brand">Quizzardous!</a>
+					<ul class="nav">
+						{% block nav_left %}{% endblock %}
+					</ul>
+					<ul class="nav pull-right">
+						{% block nav_right %}{% endblock %}
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class="row">
+				<div class="ad span3 pull-right">
+					{% block ad %}
+					{% endblock %}
+				</div>
+				<div class="toolbar span9">
+					<div class="toolbar-inner">
+						<input type="button" class="btn btn-primary" value="Ask Question">
+					</div>
+				</div>
+				<div class="post-question span9">
+				</div>
+				<div class="content span9">
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<div class="container">
+			<p class="pull-right"><a href="#">blog</a> &middot; <a href="#">about us</a> &middot; <strong><a href="#">t&amp;c</a></strong> &middot; <strong><a href="#">feedback</a></strong></p>
+			<p>made with love, care and tons of <a href="#">open source software</a></p>
+			</div>
+		</footer>
+	</body>
+</html>

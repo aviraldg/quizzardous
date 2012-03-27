@@ -1,75 +1,26 @@
-{% extends "base-fragment.html" %}
-{% block content %}
+{% extends "base.html" %}
 
-{#
-<div class="hero-unit">
-	<h1>Cool stuff, just for you!</h1>
-	<br />
-	<p>
-		<span class="brand">Quizzardous!</span> is an attempt to make quizzing fun
-		and easily accessible to everyone. So, we'll be giving away some
-		cool prizes to the top 3 rankers of this month!*
-	</p>
-	<p class="pull-right">
-		<a href="#" class="btn primary large">Learn more »</a>
-		<a href="#" class="btn large">Hide</a>
-	</p>
-	<small>*<a href="#">t&amp;c</a> apply; only applicable for users in India</small>
-</div>
-#}
 
-{#
-<div class="well post-question">
-	<a href="/questions/post"> <h4>+ Post Question.</h4> </a>
-</div>
-#}
+{# This is clearly incomplete; TODO finish this later, when
+login views are completed and overall design is finalised #}
 
-<div class="row">
-	<div class="span16">
-		<a class="btn primary pull-right" href="/questions/post">Ask New Question</a>
-		<form method="get" class="pull-left" action="/questions">
-			<select class="large" name="sort" style="margin-right: 8px;">
-				<option value="recent_first">Recent Questions First</option>
-				<option value="older_first">Older Questions First</option>
-			</select>
-			<button class="btn success">Filter &amp; Sort</button>
-		</form>
-	</div>
-</div>
-
-{% for question in questions %}
-{% include 'question-fragment.html' %}
+{% block nav_right %}
+{% if user %}
+<li><a href="#">{{ user.username }}</a></li>
 {% else %}
-<div class="alert-message block-message error">
-	<h3>Sorry, but the princess is in another castle...</h3>
-	<p>
-		... and we have no questions to display here. <em>Try broadening your search.</em>
-	</p>
-</div>
+<li><a href="#">Login</a></li>
+{% endif %}
+{% endblock %}
+
+{% block ad %}
+{# TODO: remove this placeholder image after getting adsense set up #}
+<img src="http://www.placehold.it/200x200" style="display: block; margin: auto;">
+{% endblock %}
+
+{% block content %}
+{% for question in questions %}
+<article>
+{{ question.question }}
+</article>
 {% endfor %}
-<div class="pagination span7" style="margin: auto; text-align: center;">
-	<ul>
-		<li class="prev disabled">
-			<a href="#">&larr; Previous</a>
-		</li>
-		<li class="active">
-			<a href="#">1</a>
-		</li>
-		<li>
-			<a href="#">2</a>
-		</li>
-		<li>
-			<a href="#">3</a>
-		</li>
-		<li>
-			<a href="#">4</a>
-		</li>
-		<li>
-			<a href="#">5</a>
-		</li>
-		<li class="next">
-			<a href="#">Next &rarr;</a>
-		</li>
-	</ul>
-</div>
-{% endblock content %}
+{% endblock %}

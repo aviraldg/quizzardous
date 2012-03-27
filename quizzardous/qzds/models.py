@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Question(models.Model):
 	'''Represents a question asked by a user.'''
 
-	content = models.TextField()
+	question = models.TextField()
 	author = models.ForeignKey('auth.User', related_name='questions')
 	when = models.DateTimeField(auto_now=True)
 	hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
