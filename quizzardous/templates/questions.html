@@ -11,7 +11,13 @@ login views are completed and overall design is finalised #}
 {% if user %}
 <li><a href="#">{{ user.username }}</a></li>
 {% else %}
-<li><a href="#">Login</a></li>
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
+	<ul class="dropdown-menu">
+		<li><a href="#">Login with Google</a></li>
+		<li><a href="#">Login with Facebook</a></li>
+		<li><a href="#">Login with Twitter</a></li>
+	</ul>
+</li>
 {% endif %}
 {% endblock %}
 
