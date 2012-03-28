@@ -104,6 +104,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+if DEBUG:
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+
 ROOT_URLCONF = 'quizzardous.urls'
 
 TEMPLATE_DIRS = (
@@ -117,8 +120,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'gunicorn',
-    'quizzardous.qzds'
+    'quizzardous.qzds',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -153,3 +157,6 @@ LOGGING = {
 # Gravatar base URI. Uses same protocol as current page.
 # ie. it's a protocol relative URI
 GRAVATAR_URI = '//www.gravatar.com/avatar/'
+
+# Used for django-debug-toolbar
+INTERNAL_IPS = ('127.0.0.1',)
