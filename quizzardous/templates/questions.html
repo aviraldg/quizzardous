@@ -3,6 +3,10 @@
 {# This is clearly incomplete; TODO finish this later, when
 login views are completed and overall design is finalised #}
 
+{% block nav_left %}
+<li><a href="{% url questions %}">Questions</a></li>
+{% endblock %}
+
 {% block nav_right %}
 {% if user %}
 <li><a href="#">{{ user.username }}</a></li>
