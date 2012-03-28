@@ -33,6 +33,9 @@ body {
 .navbar .brand, .brand {
 	font-family: 'Pacifico', script;
 	font-weight: normal;
+}
+
+a {
 	@include transition(color, 0.2s, ease);
 }
 
