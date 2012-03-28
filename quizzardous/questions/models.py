@@ -14,7 +14,10 @@ class Question(models.Model):
 
 	@property
 	def hearts(self):
-		return self.hearters.count()
+		try:
+			return self.hearters.count()
+		except ValueError:
+			return 0
 
 	def __unicode__(self):
 		return unicode(self.content)
