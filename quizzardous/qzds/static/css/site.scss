@@ -6,6 +6,15 @@
 	-webkit-border-radius: $r1 $r2 $r3 $r4;
 }
 
+@mixin transition($property, $time, $function) {
+	transition: $property $time $function;
+	-moz-transition: $property $time $function;
+	-o-transition: $property $time $function;
+	-webkit-transition: $property $time $function;
+}
+
+/* general styling */
+
 body {
 	padding-top: 56px;
 	background: url(../img/background.png);
@@ -14,7 +23,7 @@ body {
 .navbar .brand, .brand {
 	font-family: 'Pacifico', script;
 	font-weight: normal;
-	-moz-transition: color 0.2s ease;
+	@include transition(color, 0.2s, ease);
 }
 
 footer.footer {
@@ -22,8 +31,6 @@ footer.footer {
 	margin-top: 16px;
 	border-top: 1px solid rgb(229, 229, 229);
 }
-
-
 
 div.toolbar {
 	background-image: -webkit-linear-gradient(top, #555, #333);
@@ -52,5 +59,4 @@ article {
 	padding: 16px 0px 16px 0px;
 }
 
-article div.question-content {
-}
+
