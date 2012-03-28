@@ -6,17 +6,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^$', 'quizzardous.qzds.views.questions', name='questions')
-    # Examples:
-    # url(r'^$', 'quizzardous.views.home', name='home'),
-    # url(r'^quizzardous/', include('quizzardous.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+	url(r'^$', 'quizzardous.questions.views.questions', name='questions'),
 )
 
-# only used in development environment
+# only used in development environment (to serve static files)
 urlpatterns += staticfiles_urlpatterns()
