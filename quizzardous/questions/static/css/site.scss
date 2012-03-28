@@ -23,6 +23,14 @@
 	-webkit-transform: $functions;
 }
 
+@mixin linear-gradient($position, $c1, $c2) {
+	background-image: linear-gradient($position, $c1, $c2);
+	background-image: -webkit-linear-gradient($position, $c1, $c2);
+	background-image: -moz-linear-gradient($position, $c1, $c2);
+	background-image: -o-linear-gradient($position, $c1, $c2);
+	background-image: -ms-linear-gradient($position, $c1, $c2);
+}
+
 /* general styling */
 
 body {
@@ -46,7 +54,7 @@ footer.footer {
 }
 
 div.toolbar {
-	background-image: -webkit-linear-gradient(top, #555, #333);
+	@include linear-gradient(top, #555, #333);
 	@include border-radius(4px, 4px, 4px, 4px);
 }
 
