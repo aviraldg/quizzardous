@@ -147,3 +147,9 @@ LOGGING = {
         },
     }
 }
+
+# Custom settings.
+
+# Gravatar base URI. Uses same protocol as current page.
+# ie. it's a protocol relative URI
+GRAVATAR_URI = '//www.gravatar.com/avatar/'
