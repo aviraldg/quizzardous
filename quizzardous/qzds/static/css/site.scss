@@ -4,6 +4,7 @@
 	-moz-border-radius: $r1 $r2 $r3 $r4;
 	-o-border-radius: $r1 $r2 $r3 $r4;
 	-webkit-border-radius: $r1 $r2 $r3 $r4;
+	-ms-border-radius: $r1 $r2 $r3 $r4;
 }
 
 @mixin transition($property, $time, $function) {
@@ -11,6 +12,15 @@
 	-moz-transition: $property $time $function;
 	-o-transition: $property $time $function;
 	-webkit-transition: $property $time $function;
+	-ms-transition: $property $time $function;
+}
+
+@mixin transform($functions) {
+	transform: $functions;
+	-moz-transform: $functions;
+	-ms-transform: $functions;
+	-o-transform: $functions;
+	-webkit-transform: $functions;
 }
 
 /* general styling */
@@ -51,7 +61,7 @@ div.content {
 	background: white;
 	padding: 10px 0px 40px 0px;
 	box-shadow: 0px 0px 4px #999;
-
+	@include transform(rotate(3deg));
 }
 
 article {
