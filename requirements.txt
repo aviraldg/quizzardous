@@ -1,6 +1,12 @@
 Django==1.4
 distribute==0.6.24
 django-debug-toolbar==0.9.4
+django-socialregistration==0.5.4
+facebook-python-sdk==0.1
 gunicorn==0.14.2
+httplib2==0.7.4
+mock==0.8.0
+oauth2==1.5.211
 psycopg2==2.4.4
+python-openid==2.2.5
 wsgiref==0.1.2

@@ -1,4 +1,8 @@
-# Django settings for quizzardous project.
+try:
+    from .secrets import *
+except ImportError:
+    from django.utils.log import logging
+    logging.warn('Could not import secrets, please rename secrets.py.template to secrets.py and define appropriate settings there.')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -120,7 +124,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    'socialregistration',
+    'socialregistration.contrib.facebook',
+    'socialregistration.contrib.twitter',
+    'socialregistration.contrib.openid',
     'gunicorn',
     'quizzardous.questions',
     # Uncomment the next line to enable the admin:
@@ -128,6 +135,16 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'socialregistration.contrib.facebook.auth.FacebookAuth',
+    'socialregistration.contrib.twitter.auth.TwitterAuth',
+    'socialregistration.contrib.openid.auth.OpenIDAuth',
+)
+
+if DEBUG:
+    INSTALLED_APPS += ('debug_toolbar',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -152,7 +169,7 @@ LOGGING = {
     }
 }
 
-# Custom settings.
+# Custom settings:
 
 # Gravatar base URI. Uses same protocol as current page.
 # ie. it's a protocol relative URI
@@ -160,3 +177,6 @@ GRAVATAR_URI = '//www.gravatar.com/avatar/'
 
 # Used for django-debug-toolbar
 INTERNAL_IPS = ('127.0.0.1',)
+
+# Facebook permissions needed by django-socialregistration
+FACEBOOK_REQUEST_PERMISSIONS = ''
