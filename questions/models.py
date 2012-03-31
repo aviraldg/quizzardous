@@ -20,7 +20,7 @@ class Question(models.Model):
             return 0
 
     def __unicode__(self):
-        return unicode(self.content)
+        return unicode(self.question)
 
 class Answer(models.Model):
     """Represents an answer to a question (submitted by a user)"""

@@ -7,7 +7,7 @@ class QuestionTest(TestCase):
         self.user = User(username='testuser')
         self.user.save()
         self.question = Question()
-        self.question.content = 'Lorem ipsum dolor sit amet?'
+        self.question.question = 'Lorem ipsum dolor sit amet?'
         self.question.author = self.user
         self.question.correct_answers = ('lorem, ipsum, dolor, sit, amet')
         self.question.save()
