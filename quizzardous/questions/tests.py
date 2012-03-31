@@ -1,16 +1,19 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
+from django.contrib.auth.models import User
+from .models import Question, Answer
 
+class QuestionTest(TestCase):
+    def setUp(self):
+        self.user = User(username='testuser')
+        self.user.save()
+        self.question = Question()
+        self.question.content = 'Lorem ipsum dolor sit amet?'
+        self.question.author = self.user
+        self.question.correct_answers = ('lorem, ipsum, dolor, sit, amet')
+        self.question.save()
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+    def test_default_hearter_count(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Tests that the hearts count is 0 by default.
         """
-        self.assertEqual(1 + 1, 2)
+        self.assertEqual(self.question.hearts, 0)
