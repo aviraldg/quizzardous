@@ -5,11 +5,10 @@ from django.contrib.auth.models import User
 # from django-socialregistration. For now, this mainly serves as a placeholder
 # while things get sorted out.
 
-def user_profile(request, pk):
+def user_profile(request, pk, username):
     '''Displays a User's profile.'''
 
-    pk = int(pk)
-    target_user = User.objects.get(pk=pk)
+    target_user = User.objects.get(pk=pk, username=username)
 
     context = {
         'target_user': target_user,

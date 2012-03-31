@@ -26,6 +26,16 @@ login views are completed and overall design is finalised #}
 <img src="http://www.placehold.it/200x200" style="display: block; margin: auto;">
 {% endblock %}
 
+{% block content_top %}
+<div class="toolbar span9">
+    <div class="toolbar-inner">
+        <input type="button" class="btn btn-primary" value="Ask Question">
+    </div>
+</div>
+<div class="post-question span9">
+</div>
+{% endblock %}
+
 {% block content %}
 {% for question in questions %}
 <article>

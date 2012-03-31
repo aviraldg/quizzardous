@@ -43,7 +43,7 @@ body {
 	font-weight: normal;
 }
 
-a {
+a.brand {
 	@include transition(color, 0.2s, ease);
 }
 
@@ -85,4 +85,12 @@ article {
 	padding: 16px 0px 16px 0px;
 }
 
+.user-profile {
+	h1, h2 {
+		display: inline;
+	}
 
+	h2.username {
+		color: gray;
+	}
+}

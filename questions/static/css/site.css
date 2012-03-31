@@ -8,7 +8,7 @@ body {
   font-family: 'Pacifico', script;
   font-weight: normal; }
 
-a {
+a.brand {
   transition: color 0.2s ease;
   -moz-transition: color 0.2s ease;
   -o-transition: color 0.2s ease;
@@ -69,3 +69,8 @@ div.content {
 article {
   display: block;
   padding: 16px 0px 16px 0px; }
+
+.user-profile h1, .user-profile h2 {
+  display: inline; }
+.user-profile h2.username {
+  color: gray; }
