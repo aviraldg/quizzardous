@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     (r'^$', redirect_to, {'url': 'questions'}),
     (r'^social/', include('socialregistration.urls', namespace='socialregistration')),
     (r'^questions/', include('questions.urls')),
+    (r'^users/', include('users.urls'))
 )
 
 # only used in development environment (to serve static files)
