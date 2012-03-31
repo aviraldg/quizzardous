@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load usertags %}
 
 {# This is clearly incomplete; TODO finish this later, when
 login views are completed and overall design is finalised #}
@@ -27,6 +28,13 @@ login views are completed and overall design is finalised #}
 {% endblock %}
 
 {% block content %}
+<ul class="thumbnails">
+    <li class="span2">
+        <a href="{% url user_profile target_user.pk %}" class="thumbnail">
+            <img src="{% avatar target_user size=128 %}">
+        </a>
+    </li>
+</ul>
 <h1>{{ target_user.username }}</h1>
 <h2>{{ target_user.email }}</h2>
 {% endblock %}
