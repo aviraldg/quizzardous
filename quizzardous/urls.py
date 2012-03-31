@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # most popular recent questions. For now, this should do.
     (r'^$', redirect_to, {'url': 'questions'}),
     (r'^social/', include('socialregistration.urls', namespace='socialregistration')),
-    (r'^questions/', include('quizzardous.questions.urls')),
+    (r'^questions/', include('questions.urls')),
 )
 
 # only used in development environment (to serve static files)
