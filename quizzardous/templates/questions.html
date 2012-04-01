@@ -38,8 +38,6 @@ login views are completed and overall design is finalised #}
 
 {% block content %}
 {% for question in questions %}
-<article>
-{{ question.question }}
-</article>
+{% include "question-fragment.html" %}
 {% endfor %}
 {% endblock %}

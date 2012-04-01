@@ -1,0 +1,16 @@
+{% load usertags %}
+<article>
+    <div class="span8 pull-right">
+        <div class="question">
+            {{ question.question }}
+        </div>
+        <br />
+        posted <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr>
+    </div>
+    <ul class="thumbnails">
+        <li class="span1">
+            <a class="thumbnail" href="{% url user_profile question.author.pk question.author.username %}"><img src="{% avatar question.author size=54 %}"></a>
+            <a href="{% url user_profile question.author.pk question.author.username %}"><div class="profile-data">{{ question.author.username }}</div></a>
+        </li>
+    </ul>
+</article>

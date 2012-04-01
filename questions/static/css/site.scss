@@ -82,7 +82,7 @@ div.content {
 
 article {
 	display: block;
-	padding: 16px 0px 16px 0px;
+	padding: 8px 0px 0px 0px;
 }
 
 .user-profile {
@@ -106,4 +106,12 @@ article {
 	color: gray;
 	text-align: center;
 	margin-top: 6px;
+}
+
+.question {
+	background: #eee;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 1px solid #DDDDDD;
+	padding: 16px;
+	@include border-radius(4px, 4px, 4px, 4px);
 }
