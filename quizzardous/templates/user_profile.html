@@ -31,16 +31,21 @@ login views are completed and overall design is finalised #}
 <div class="span7 pull-right user-profile">
     <h1>{{ target_user.get_full_name }}</h1>
     <h2 class="username">({{ target_user.username }})</h2>
-    <table>
-        <tr><td>Joined</td><td> {{ target_user.date_joined }} </td></tr>
+    <table class="table">
+        <caption>about</caption>
+        <tr><td>email</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.email }}</a></td></tr>
+        <tr><td>age</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.age }}</a></td></tr>
+        <tr><td>joined</td><td><abbr class="timestamp" title="{{ target_user.date_joined.isoformat }}">{{ target_user.date_joined }}</abbr> </td></tr>
     </table>
     <h2>Recent Activity</h2>
 </div>
 <ul class="thumbnails">
-    <li class="span2">
+    <div class="span2">
         <a href="{% url user_profile target_user.pk target_user.username %}" class="thumbnail">
             <img src="{% avatar target_user size=128 %}">
         </a>
-    </li>
+        <div class="profile-data"><span class="badge badge-warning">300</span> points</div>
+        <div class="profile-data"><span class="badge badge-warning">1<sup>st</sup></span> rank</div>
+    </div>
 </ul>
 {% endblock %}

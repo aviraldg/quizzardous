@@ -74,3 +74,13 @@ article {
   display: inline; }
 .user-profile h2.username {
   color: gray; }
+.user-profile caption {
+  text-align: left;
+  font-weight: bold;
+  color: gray; }
+
+.profile-data {
+  font-weight: bold;
+  color: gray;
+  text-align: center;
+  margin-top: 6px; }

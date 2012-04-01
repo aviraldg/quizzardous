@@ -1,0 +1,3 @@
+$(function () {
+    $('.timestamp').timeago();
+})
