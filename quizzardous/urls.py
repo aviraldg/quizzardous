@@ -11,7 +11,6 @@ urlpatterns = patterns('',
     # TODO: This, the homepage, should in the future point to a list of the
     # most popular recent questions. For now, this should do.
     (r'^$', redirect_to, {'url': 'questions'}),
-    (r'^social/', include('socialregistration.urls', namespace='socialregistration')),
     (r'^questions/', include('questions.urls')),
     (r'^users/', include('users.urls'))
 )
