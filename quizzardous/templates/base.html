@@ -17,7 +17,7 @@
 						{% block nav_left %}{% endblock %}
 					</ul>
 					<ul class="nav pull-right">
-						{% block nav_right %}{% endblock %}
+						{% include "nav_control_fragment.html" %}
 					</ul>
 				</div>
 			</div>
@@ -26,8 +26,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="ad span3 pull-right">
-					{% block ad %}
-					{% endblock %}
+					{% include "ad_fragment.html" %}
 				</div>
 				{% block content_top %}
 				{% endblock %}

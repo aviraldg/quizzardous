@@ -7,25 +7,6 @@ login views are completed and overall design is finalised #}
 <li><a href="{% url questions %}">Questions</a></li>
 {% endblock %}
 
-{% block nav_right %}
-{% if user %}
-<li><a href="#">{{ user.username }}</a></li>
-{% else %}
-<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
-	<ul class="dropdown-menu">
-		<li><a href="#">Login with Google</a></li>
-		<li><a href="#">Login with Facebook</a></li>
-		<li><a href="#">Login with Twitter</a></li>
-	</ul>
-</li>
-{% endif %}
-{% endblock %}
-
-{% block ad %}
-{# TODO: remove this placeholder image after getting adsense set up #}
-<img src="http://www.placehold.it/200x200" style="display: block; margin: auto;">
-{% endblock %}
-
 {% block content_top %}
 <div class="toolbar span9">
     <div class="toolbar-inner">
@@ -38,6 +19,6 @@ login views are completed and overall design is finalised #}
 
 {% block content %}
 {% for question in questions %}
-{% include "question-fragment.html" %}
+{% include "question_fragment.html" %}
 {% endfor %}
 {% endblock %}

@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+<li><a href="{% url user_profile user.pk user.username %}">{{ user.username }}</a></li>
+{% else %}
+<li>
+    <a href="#">Login</a>
+</li>
+{% endif %}
