@@ -1,7 +1,17 @@
 {% if user.is_authenticated %}
-<li><a href="{% url user_profile user.pk user.username %}">{{ user.username }}</a></li>
+<li>
+    <a href="{% url user_profile user.pk user.username %}">
+        {% if user.is_staff %}<span class="staffuser">*</span>{% endif %}{{ user.username }}
+    </a>
+</li>
+<li class="dropdown">
+    <a href="#" class="iconic cog dropdown-toggle" data-toggle="dropdown"></a>
+    <ul class="dropdown-menu">
+        <li><a href="{% url logout %}">Logout</a></li>
+    </ul>
+</li>
 {% else %}
 <li>
-    <a href="#">Login</a>
+    <a href="{% url login %}">Login</a>
 </li>
 {% endif %}

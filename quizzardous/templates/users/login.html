@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content_top %}
+<div class="page-header">
+    <h1>Login to Quizzardous!</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url login %}">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }} </td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }} </td>
+            <td>{{ form.password }}</td>
+        </tr>
+        <tr>
+            <td><input class="btn btn-info" type="submit" value="Login"></td>
+            <td><a class="btn btn-success" href="#">Register</a></td>
+        </tr>
+    </table>
+
+    
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+{% endblock %}

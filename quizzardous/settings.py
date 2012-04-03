@@ -1,3 +1,5 @@
+from django.core.urlresolvers import reverse_lazy
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -140,7 +142,6 @@ INSTALLED_APPS = (
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'socialregistration.contrib.openid.auth.OpenIDAuth',
 )
 
 if DEBUG:
@@ -177,3 +178,11 @@ GRAVATAR_URI = '//www.gravatar.com/avatar/'
 
 # Used for django-debug-toolbar
 INTERNAL_IPS = ('127.0.0.1',)
+
+# django.contrib.auth stuff; self-explanatory
+
+LOGIN_URL = reverse_lazy('login')
+
+LOGIN_REDIRECT_URL = reverse_lazy('questions')
+
+LOGOUT_URL = reverse_lazy('logout')
