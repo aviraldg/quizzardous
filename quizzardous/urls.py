@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 urlpatterns = patterns('',
     # TODO: This, the homepage, should in the future point to a list of the
     # most popular recent questions. For now, this should do.
-    (r'^$', redirect_to, {'url': 'questions'}),
+    (r'^$', redirect_to, {'url': 'questions'}, 'homepage'),
     (r'^questions/', include('questions.urls')),
     (r'^users/', include('users.urls'))
 )
