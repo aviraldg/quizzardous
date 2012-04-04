@@ -186,3 +186,5 @@ LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('questions')
 
 LOGOUT_URL = reverse_lazy('logout')
+
+AUTH_PROFILE_MODULE = 'users.UserProfile'

@@ -15,7 +15,7 @@ login views are completed and overall design is finalised #}
     <table class="table">
         <caption>about</caption>
         <tr><td>email</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.email }}</a></td></tr>
-        <tr><td>age</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.age }}</a></td></tr>
+        <tr><td>age</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.get_profile.get_age }}</a></td></tr>
         <tr><td>joined</td><td><abbr class="timestamp" title="{{ target_user.date_joined.isoformat }}">{{ target_user.date_joined }}</abbr> </td></tr>
     </table>
     <h2>Recent Activity</h2>
@@ -25,8 +25,8 @@ login views are completed and overall design is finalised #}
         <a href="{% url user_profile target_user.pk target_user.username %}" class="thumbnail">
             <img src="{% avatar target_user size=128 %}">
         </a>
-        <div class="profile-data"><span class="badge badge-warning">300</span> points</div>
-        <div class="profile-data"><span class="badge badge-warning">1<sup>st</sup></span> rank</div>
+        <div class="profile-data"><span class="badge badge-warning">{{ target_user.get_profile.get_score }}</span> points</div>
+        <div class="profile-data"><span class="badge badge-warning">{{ target_user.get_profile.get_rank }}</span> rank</div>
     </div>
 </ul>
 {% endblock %}

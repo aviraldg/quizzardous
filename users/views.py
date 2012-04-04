@@ -11,6 +11,6 @@ def user_profile(request, pk, username):
         'target_user': target_user,
     }
 
-    return render_to_response('user_profile.html',
+    return render_to_response('users/user_profile.html',
         context,
         RequestContext(request))
