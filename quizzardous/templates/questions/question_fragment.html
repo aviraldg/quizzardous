@@ -6,6 +6,8 @@
         </div>
         <br />
         posted <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr>
+        {# TODO: looks very ugly, change design later #}
+        <div class="pull-right"><a href="{{ question.get_absolute_url }}">permalink</a></div>
     </div>
     <ul class="thumbnails">
         <li class="span1">

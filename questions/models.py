@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from quizzardous.utils import slugify
 
 class Question(models.Model):
     """Represents a question asked by a user."""
@@ -8,12 +9,27 @@ class Question(models.Model):
         ordering = ['-when']
 
     question = models.TextField()
+    # A slug is actually required, but if it's empty, then it'll automatically
+    # be converted from question (see above)
+    slug = models.SlugField(default='', blank=True)
     author = models.ForeignKey('auth.User', related_name='questions')
     when = models.DateTimeField(auto_now=True)
     hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
     correct_answers = models.TextField()
 
     # TODO: Tags - custom implementation or django-tagging?
+
+    def clean(self):
+        if not self.slug:
+            self.slug = slugify(self.question)
+
+    def save(self):
+        self.full_clean()
+        super(self.__class__, self).save(self)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('question', (self.pk, self.slug))
 
     @property
     def hearts(self):
