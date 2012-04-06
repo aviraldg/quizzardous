@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gunicorn',
+    'tastypie',
     'crispy_forms',
     'questions',
     'users',
