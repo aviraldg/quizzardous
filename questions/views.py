@@ -9,6 +9,6 @@ def questions(request):
             'questions': Question.objects.all(),
     }
 
-    return render_to_response('questions.html',
+    return render_to_response('questions/questions.html',
         context,
         RequestContext(request))
