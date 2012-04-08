@@ -190,3 +190,9 @@ LOGIN_REDIRECT_URL = reverse_lazy('questions')
 LOGOUT_URL = reverse_lazy('logout')
 
 AUTH_PROFILE_MODULE = 'users.UserProfile'
+
+# questions app
+
+# TODO: This should probably be editable at runtime but for now this sounds like
+# a good default.
+QUESTIONS_PER_PAGE = 10
