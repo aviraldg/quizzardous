@@ -15,7 +15,7 @@
 				<div class="container">
 					<a href="{% url homepage %}" class="brand">Quizzardous!</a>
 					<ul class="nav">
-						{% block nav_left %}{% endblock %}
+						{% include "nav_site_fragment.html" %}
 					</ul>
 					<ul class="nav pull-right">
 						{% include "nav_control_fragment.html" %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+{# TODO: Placeholder for testing; improve design. #}
+
+<div class="page-header">
+    <h1>Rankings</h1>
+</div>
+<ol>
+    {% for rank in rankings %}
+    <li><a href="{% url user_profile rank.user.pk rank.user.username %}">{{ rank.user.username }}</a> ({{ rank.score }})</li>
+    {% endfor %}
+</ol>
+{% endblock %}

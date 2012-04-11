@@ -1,12 +1,6 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% load usertags %}
-
-{# This is clearly incomplete; TODO finish this later, when
-login views are completed and overall design is finalised #}
-
-{% block nav_left %}
-<li><a href="{% url questions %}">Questions</a></li>
-{% endblock %}
 
 {% block content %}
 <div class="span7 pull-right user-profile">
@@ -25,8 +19,8 @@ login views are completed and overall design is finalised #}
         <a href="{% url user_profile target_user.pk target_user.username %}" class="thumbnail">
             <img src="{% avatar target_user size=128 %}">
         </a>
-        <div class="profile-data"><span class="badge badge-warning">{{ target_user.get_profile.get_score }}</span> points</div>
-        <div class="profile-data"><span class="badge badge-warning">{{ target_user.get_profile.get_rank }}</span> rank</div>
+        <div class="profile-data"><span class="badge badge-warning">{{ target_user.get_profile.get_monthly_score }}</span> points</div>
+        <div class="profile-data"><span class="badge badge-warning">{{ target_user.get_profile.get_monthly_rank|ordinal }}</span> rank</div>
     </div>
 </ul>
 {% endblock %}
