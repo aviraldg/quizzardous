@@ -9,7 +9,7 @@ def questions(request, page=1):
 
     # TODO: This can't be hardcoded, has to be an option on the
     # sorting/filtering toolbar.
-    results = Question.objects.all().order_by('-when')
+    results = Question.objects.all().order_by('-when').select_related('author')
     paginator = Paginator(results, settings.QUESTIONS_PER_PAGE)
 
     context = {
