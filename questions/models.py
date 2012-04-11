@@ -13,7 +13,7 @@ class Question(models.Model):
     # be converted from question (see above)
     slug = models.SlugField(default='', blank=True)
     author = models.ForeignKey('auth.User', related_name='questions')
-    when = models.DateTimeField(auto_now=True)
+    when = models.DateTimeField(auto_now=True, db_index=True)
     hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
     correct_answers = models.TextField()
 
