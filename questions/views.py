@@ -1,8 +1,10 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .models import Question
+from .forms import QuestionForm
 
 def questions(request, page=1):
     '''Displays the list of questions.'''
@@ -29,4 +31,26 @@ def question(request, pk, slug):
 
     return render_to_response('questions/question.html',
         context,
+        RequestContext(request))
+
+@login_required
+def ask(request):
+    '''
+    Displays a form to ask a question and creates a new question if validated.
+    '''
+
+    form = None
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.author = request.user
+            question.save()
+            return redirect(question.get_absolute_url())
+    else:
+        form = QuestionForm()
+
+    return render_to_response('questions/ask.html',
+        {'form': form},
         RequestContext(request))
