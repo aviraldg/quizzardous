@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from quizzardous.utils import slugify
+from .utils import *
 
 class Question(models.Model):
-    """Represents a question asked by a user."""
+    '''Represents a question asked by a user.'''
 
     class Meta:
         ordering = ['-when']
@@ -15,9 +16,7 @@ class Question(models.Model):
     author = models.ForeignKey('auth.User', related_name='questions')
     when = models.DateTimeField(auto_now=True, db_index=True)
     hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
-    correct_answers = models.TextField()
-
-    # TODO: Tags - custom implementation or django-tagging?
+    correct_answer = models.TextField()
 
     def clean(self):
         if not self.slug:
@@ -31,19 +30,17 @@ class Question(models.Model):
     def get_absolute_url(self):
         return ('question', (self.pk, self.slug))
 
-    @property
-    def hearts(self):
-        try:
-            return self.hearters.count()
-        except ValueError:
-            return 0
-
     def __unicode__(self):
         return unicode(self.question)
 
 class Answer(models.Model):
-    """Represents an answer to a question (submitted by a user)"""
+    '''Represents an answer to a question (submitted by a user)'''
 
     question = models.ForeignKey('Question', related_name='answers')
     answer = models.TextField()
-    author = models.ForeignKey('auth.User', related_name='answers')
+    authors = models.ForeignKey('auth.User', related_name='answers')
+    # A 'null' value here represents that the answer has not been reviewed yet
+    correct = models.NullBooleanField()
+
+    def __unicode__(self):
+        return unicode(self.answer)
