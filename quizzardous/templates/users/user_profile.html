@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="span7 pull-right user-profile">
-    <h1>{% if target_user.is_staff %}{{ target_user.get_full_name }}{% endif %}</h1>
-    <h2 class="username">(<abbr class="staffuser" title="This user is a staff member.">*</abbr>{{ target_user.username }})</h2>
+    <h1>{{ target_user.get_full_name }}</h1>
+    <h2 class="username">({% if target_user.is_staff %}<abbr class="staffuser" title="This user is a staff member.">*</abbr>{% endif %}{{ target_user.username }})</h2>
     <table class="table">
         <caption>about</caption>
         <tr><td>email</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.email }}</a></td></tr>
