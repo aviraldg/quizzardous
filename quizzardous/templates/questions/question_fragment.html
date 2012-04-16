@@ -5,7 +5,8 @@
             {{ question.question }}
         </div>
         <div class="question-meta">
-            <a href="{{ question.get_absolute_url }}">posted <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr></a> by <a href="{% url user_profile question.author.pk question.author.username %}">{{ question.author.username }}</a>
+            <a href="{{ question.get_absolute_url }}" class="iconic link"></a>
+            posted <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr> by <a href="{% url user_profile question.author.pk question.author.username %}">{{ question.author.username }}</a>
             <div class="pull-right">
                 <input type="button" class="btn btn-small btn-danger" value="Report"></input>
                 <input type="button" class="btn btn-small btn-success" value="Answer"></input>
