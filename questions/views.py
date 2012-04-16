@@ -6,8 +6,11 @@ from django.conf import settings
 from .models import Question
 from .forms import QuestionForm
 
-def questions(request, page=1):
+def questions(request, page=None):
     '''Displays the list of questions.'''
+
+    if not page:
+        page = 1
 
     # TODO: This can't be hardcoded, has to be an option on the
     # sorting/filtering toolbar.
@@ -15,7 +18,7 @@ def questions(request, page=1):
     paginator = Paginator(results, settings.QUESTIONS_PER_PAGE)
 
     context = {
-        'questions': paginator.page(page),
+        'questions_list': paginator.page(page),
     }
 
     return render_to_response('questions/questions.html',

@@ -1,0 +1,18 @@
+{# TODO: Implement proper pagination controls. This is very rudimentary and "just works" (at least for now) #}
+
+<ul class="pager">
+    {% if questions_list.has_previous %}
+    <li class="previous">
+    {% else %}
+    <li class="previous disabled">
+    {% endif %}
+        <a href="{% url questions_page page=questions_list.previous_page_number %}">&larr; Newer Questions</a>
+    </li>
+    {% if questions_list.has_next %}
+    <li class="next">
+    {% else %}
+    <li class="next disabled">
+    {% endif %}
+        <a href="{% url questions_page page=questions_list.next_page_number %}">Older Questions &rarr;</a>
+    </li>
+</ul>

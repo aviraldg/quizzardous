@@ -11,7 +11,11 @@
 {% endblock %}
 
 {% block content %}
-{% for question in questions %}
+{% for question in questions_list %}
 {% include "questions/question_fragment.html" %}
 {% endfor %}
+
+<br>
+
+{% include "questions/pagination_fragment.html" %}
 {% endblock %}
