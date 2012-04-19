@@ -7,8 +7,8 @@ register = template.Library()
 @register.simple_tag
 def avatar(user, **kwargs):
     DEFAULT_SIZE = 80
-    # other options: 404, mm, monsterid, wavatar, retro
-    DEFAULT = 'identicon'
+    # other options: 404, mm, monsterid, wavatar, retro, identicon
+    DEFAULT = 'mm'
 
     hash = hashlib.md5(user.email.lower().strip()).hexdigest()
     size = kwargs.get('size', DEFAULT_SIZE)
