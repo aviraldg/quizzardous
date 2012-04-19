@@ -1,7 +1,9 @@
-from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.shortcuts import *
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 from django.conf import settings
 from .models import Question
 from .forms import QuestionForm
@@ -35,6 +37,35 @@ def question(request, pk, slug):
     return render_to_response('questions/question.html',
         context,
         RequestContext(request))
+
+@csrf_protect
+def delete_question(request, pk, slug):
+    '''
+    Delete a question. Only for internal use, the API has another method.
+    It's assumed that the user has already confirmed this action.
+    '''
+
+    if request.method != 'POST':
+        # We should probably show an error message or something here, but
+        # this really isn't a view that might be accessed manually by a user.
+        return redirect(reverse('questions'))
+
+    question = get_object_or_404(Question, pk=pk, slug=slug)
+    user = request.user
+
+    if user.is_authenticated() and user.get_profile().can_edit(question):
+        question.delete()
+    else:
+        context = {
+            'error_message': '''It looks like you tried to delete someone else\'s
+            question (which you obviously can\'t do.) If you\'re sure this is
+            your question, try clearing your browser\'s cookies and logging
+            in again.'''
+        }
+
+        return render(request, '401.html', status=401, dictionary=context)
+
+    return redirect(request.GET.get('next', reverse('questions')))
 
 @login_required
 def ask(request):

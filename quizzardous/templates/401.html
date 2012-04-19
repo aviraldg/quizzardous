@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="alert alert-error">
+<h2>Sorry, but you can't do that...</h2>
+<p>
+{% if error_message %}
+{{ error_message }}
+{% else %}
+It looks like you don't have the necessary permissions to carry out that action.
+{% endif %}
+</p>
+</div>
+{% endblock %}

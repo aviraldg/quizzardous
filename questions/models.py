@@ -15,8 +15,9 @@ class Question(models.Model):
     slug = models.SlugField(default='', blank=True)
     author = models.ForeignKey('auth.User', related_name='questions')
     when = models.DateTimeField(auto_now=True, db_index=True)
-    hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
     correct_answer = models.TextField()
+    hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
+    reporters = models.ManyToManyField('auth.User', related_name='reported_questions')
 
     def clean(self):
         if not self.slug:

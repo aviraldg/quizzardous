@@ -8,6 +8,9 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, related_name='profile')
 
+    def can_edit(self, question):
+        return self.user.is_staff or question.author == self.user
+
     def get_monthly_score(self):
         '''
         Gets the score from this month's ScoreCounter, or creates it if it
@@ -32,7 +35,6 @@ class UserProfile(models.Model):
         # score greater than the current user + 1
 
         return ScoreCounter.objects.order_by('-score').filter(score__gt=counter.score).count() + 1
-
 
 
 def create_user_profile(sender, instance, created, **kwargs):
