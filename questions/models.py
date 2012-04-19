@@ -3,6 +3,16 @@ from django.contrib.auth.models import User
 from quizzardous.utils import slugify
 from .utils import *
 
+def _get_default_category():
+    return Category.objects.get_or_create(name='uncategorised')[0]
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=32)
+
+    def __unicode__(self):
+        return unicode(self.name)
+
 class Question(models.Model):
     '''Represents a question asked by a user.'''
 
@@ -16,6 +26,7 @@ class Question(models.Model):
     author = models.ForeignKey('auth.User', related_name='questions')
     when = models.DateTimeField(auto_now=True, db_index=True)
     correct_answer = models.TextField()
+    category = models.ForeignKey(Category, related_name='questions', default=_get_default_category)
     hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
     reporters = models.ManyToManyField('auth.User', related_name='reported_questions')
 
