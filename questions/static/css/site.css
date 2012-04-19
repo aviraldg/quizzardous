@@ -46,24 +46,7 @@ div.content {
 .ad {
   background: white;
   padding: 10px 0px 40px 0px;
-  box-shadow: 0px 0px 4px #999;
-  transform: rotate(3deg);
-  -moz-transform: rotate(3deg);
-  -ms-transform: rotate(3deg);
-  -o-transform: rotate(3deg);
-  -webkit-transform: rotate(3deg);
-  transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  -webkit-transition: all 1s ease;
-  -ms-transition: all 1s ease; }
-
-.ad:hover {
-  transform: rotate(-1deg);
-  -moz-transform: rotate(-1deg);
-  -ms-transform: rotate(-1deg);
-  -o-transform: rotate(-1deg);
-  -webkit-transform: rotate(-1deg); }
+  box-shadow: 0px 0px 4px #999; }
 
 article {
   display: block;
