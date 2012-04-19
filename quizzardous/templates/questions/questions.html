@@ -30,3 +30,12 @@
 
 {% include "questions/pagination_fragment.html" %}
 {% endblock %}
+
+{% block post_content %}
+<div class="statistics span3 pull-right profile-data">
+<h1 class="cursive">- Statistics -</h1>
+<strong>{{ question_count }} questions asked.</strong><br />
+<strong>{{ answer_count }} answers.</strong><br />
+<strong>{{ user_count }} active users.</strong>
+</div>
+{% endblock %}

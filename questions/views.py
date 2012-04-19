@@ -4,8 +4,9 @@ from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.models import User
 from django.conf import settings
-from .models import Question
+from .models import Question, Answer
 from .forms import QuestionForm
 
 def questions(request, page=None):
@@ -19,8 +20,12 @@ def questions(request, page=None):
     results = Question.objects.all().order_by('-when').select_related('author')
     paginator = Paginator(results, settings.QUESTIONS_PER_PAGE)
 
+    # TODO: IMPORTANT: The _count bits below *need* to be cached.
     context = {
         'questions_list': paginator.page(page),
+        'question_count': Question.objects.count(),
+        'answer_count': Answer.objects.count(),
+        'user_count': User.objects.count(),
     }
 
     return render_to_response('questions/questions.html',

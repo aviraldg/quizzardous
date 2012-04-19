@@ -38,7 +38,7 @@ body {
 	background: url(../img/background.png);
 }
 
-.navbar .brand, .brand {
+.navbar .brand, .brand, .cursive {
 	font-family: 'Pacifico', script;
 	font-weight: normal;
 }
@@ -121,4 +121,8 @@ article {
 
 .question-meta {
 	padding-top: 8px;
+}
+
+.statistics {
+	margin-top: 16px;
 }
