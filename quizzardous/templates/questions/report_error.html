@@ -1,0 +1,14 @@
+{% extends "401.html" %}
+
+{% block error_message %}
+<p>It looks like you don't have the necessary permissions to report that question.
+This could be caused by several reasons, including:</p>
+<ul>
+    <li>You might not be logged in properly. Try <a href="{% url login %}">logging in again</a>.</li>
+    <li>You tried to report your own question, which isn't allowed. If you don't like the content of your question, please delete it instead.</li>
+</ul>
+{% endblock %}
+
+{% block post_error %}
+<button class="btn btn-large btn-primary pull-right" onclick="history.back();">&larr; Back</button>
+{% endblock %}

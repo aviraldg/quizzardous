@@ -30,6 +30,12 @@ class Question(models.Model):
     hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
     reporters = models.ManyToManyField('auth.User', related_name='reported_questions')
 
+    def toggle_report(self, user):
+        if self.reporters.filter(pk=user.pk).exists():
+            self.reporters.remove(user)
+        else:
+            self.reporters.add(user)
+
     def clean(self):
         if not self.slug:
             self.slug = slugify(self.question)

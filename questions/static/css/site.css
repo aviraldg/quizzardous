@@ -86,3 +86,6 @@ article {
 
 .statistics {
   margin-top: 16px; }
+
+.question-container.reported {
+  opacity: 0.5; }

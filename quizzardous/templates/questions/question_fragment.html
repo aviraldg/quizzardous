@@ -1,5 +1,10 @@
 {% load usertags %}
-<article>
+
+{% if question.reporters.count > 0 %}
+<article class="question-container reported">
+{% else %}
+<article class="question-container">
+{% endif %}
     <div class="span8 pull-right">
         <div class="question">
             {{ question.question }}
@@ -9,13 +14,18 @@
             <span class="badge">{{ question.category }}</span>
             (posted <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr> by <a href="{% url user_profile question.author.pk question.author.username %}">{{ question.author.username }}</a>)
             <div class="pull-right">
-                {% if question.author == user %}
+                {% if not question.author == user %}
+                <form class="form-inline" style="display: inline;" method="post" action="{% url report_question question.pk question.slug %}">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-small btn-primary" value="Report {% if user.is_staff %}({{ question.reporters.count }}){% endif %}"></input>
+                </form>
+                {% endif %}
+
+                {% if question.author == user or user.is_staff %}
                 <form class="form-inline" style="display: inline;" method="post" action="{% url delete_question question.pk question.slug %}">
                     {% csrf_token %}
                     <input type="submit" class="btn btn-small btn-danger" value="Delete"></input>
                 </form>
-                {% else %}
-                <input type="button" class="btn btn-small btn-primary" value="Report"></input>
                 {% endif %}
                 <input type="button" class="btn btn-small btn-success" value="Answer"></input>
             </div>

@@ -5,5 +5,6 @@ urlpatterns = patterns('questions.views',
     url(r'^page/(?P<page>\d+)/$', 'questions', name='questions_page'),
     url(r'^(?P<pk>\d+)/(?P<slug>\S+)/$', 'question', name='question'),
     url(r'^(?P<pk>\d+)/(?P<slug>\S+)/delete$', 'delete_question', name='delete_question'),
+    url(r'^(?P<pk>\d+)/(?P<slug>\S+)/report$', 'report_question', name='report_question'),
     url(r'^ask/$', 'ask', name='ask_question'),
 )

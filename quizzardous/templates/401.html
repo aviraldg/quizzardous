@@ -6,8 +6,12 @@
 {% if error_message %}
 {{ error_message }}
 {% else %}
+{% block error_message %}
 It looks like you don't have the necessary permissions to carry out that action.
+{% endblock %}
 {% endif %}
 </p>
 </div>
+{% block post_error %}
+{% endblock %}
 {% endblock %}

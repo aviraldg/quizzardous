@@ -69,7 +69,28 @@ def delete_question(request, pk, slug):
         }
 
         return render(request, '401.html', status=401, dictionary=context)
+    return redirect(request.GET.get('next', reverse('questions')))
 
+@csrf_protect
+def report_question(request, pk, slug):
+    '''
+    Report a question. Only for internal use, the API has another method.
+    It's assumed that the user has already confirmed this action. If the user
+    has already reported this question, then it is "un-reported"
+    '''
+
+    if request.method != 'POST':
+        # We should probably show an error message or something here, but
+        # this really isn't a view that might be accessed manually by a user.
+        return redirect(reverse('questions'))
+
+    question = get_object_or_404(Question, pk=pk, slug=slug)
+    user = request.user
+
+    if user.is_authenticated() and question.author != user:
+        question.toggle_report(user)
+    else:
+        return render(request, 'questions/report_error.html', status=401)
     return redirect(request.GET.get('next', reverse('questions')))
 
 @login_required
