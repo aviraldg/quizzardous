@@ -12,7 +12,7 @@
         <div class="question-meta">
             <a href="{{ question.get_absolute_url }}" class="iconic link" title="Permanent link to this question."></a>
             <span class="badge">{{ question.category }}</span>
-            (posted <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr> by <a href="{% url user_profile question.author.pk question.author.username %}">{{ question.author.username }}</a>)
+            (asked <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr> by <a href="{% url user_profile question.author.pk question.author.username %}">{{ question.author.username }}</a>)
             <div class="pull-right">
                 {% if not question.author == user %}
                 <form class="form-inline" style="display: inline;" method="post" action="{% url report_question question.pk question.slug %}">
