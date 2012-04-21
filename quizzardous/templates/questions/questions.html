@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block content_top %}
 <div class="toolbar span9">
@@ -34,8 +35,8 @@
 {% block post_content %}
 <div class="statistics span3 pull-right profile-data">
 <h1 class="cursive">- Statistics -</h1>
-<strong>{{ question_count }} questions asked.</strong><br />
-<strong>{{ answer_count }} answers.</strong><br />
-<strong>{{ user_count }} active users.</strong>
+<strong><span style="color: #46a546;">{{ question_count|intcomma }}</span> questions asked.</strong><br />
+<strong><span style="color: #46a546;">{{ answer_count|intcomma }}</span> answers.</strong><br />
+<strong><span style="color: #46a546;">{{ user_count|intcomma }}</span> active users.</strong>
 </div>
 {% endblock %}
