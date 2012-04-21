@@ -198,3 +198,5 @@ AUTH_PROFILE_MODULE = 'users.UserProfile'
 # TODO: This should probably be editable at runtime but for now this sounds like
 # a good default.
 QUESTIONS_PER_PAGE = 10
+
+USERS_PER_PAGE = 10
