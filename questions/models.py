@@ -31,6 +31,9 @@ class Question(models.Model):
     hearters = models.ManyToManyField('auth.User', related_name='hearted_questions')
     reporters = models.ManyToManyField('auth.User', related_name='reported_questions')
 
+    def is_answered(self, user):
+        return self.answers.filter(author=user).exists()
+
     def toggle_report(self, user):
         if self.reporters.filter(pk=user.pk).exists():
             self.reporters.remove(user)
@@ -57,7 +60,7 @@ class Answer(models.Model):
 
     question = models.ForeignKey('Question', related_name='answers')
     answer = models.TextField()
-    authors = models.ForeignKey('auth.User', related_name='answers')
+    author = models.ForeignKey('auth.User', related_name='answers')
     # A 'null' value here represents that the answer has not been reviewed yet
     correct = models.NullBooleanField()
 

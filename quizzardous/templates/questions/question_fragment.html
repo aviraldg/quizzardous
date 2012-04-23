@@ -28,7 +28,9 @@
                     <input type="submit" class="btn btn-small btn-danger" value="Delete"></input>
                 </form>
                 {% endif %}
-                <input type="button" class="btn btn-small btn-success" value="Answer"></input>
+                {% if not hide_answer_link %}
+                <a href="{% url question question.pk question.slug %}" class="btn btn-small btn-success">Answer</a>
+                {% endif %}
             </div>
         </div>
     </div>

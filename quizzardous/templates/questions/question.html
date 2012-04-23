@@ -2,4 +2,15 @@
 
 {% block content %}
 {% include "questions/question_fragment.html" %}
+{% if not answered %}
+<form action="{% url question question.pk question.slug %}" method="POST">
+{% csrf_token %}
+{{ answer_form }}
+<input type="submit" value="Submit Answer" class="btn btn-success btn-large pull-right">
+</form>
+{% else %}
+<div class="alert alert-info">
+    <strong>You have answered this question.</strong> Please wait until someone reviews your answer.
+</div>
+{% endif %}
 {% endblock %}

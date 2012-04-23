@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
 from django.conf import settings
 from .models import Question, Answer
-from .forms import QuestionForm
+from .forms import QuestionForm, AnswerForm
 
 def questions(request, page=None):
     '''Displays the list of questions.'''
@@ -33,10 +33,28 @@ def questions(request, page=None):
         RequestContext(request))
 
 def question(request, pk, slug):
-    '''Displays a specific question. (mainly for search engines)'''
+    '''Displays a specific question. Also allows user to answer a question.'''
+
+    answer_form = None
+    question = get_object_or_404(Question, pk=pk, slug=slug)
+
+    if request.method == 'POST':
+        if not request.user.is_authenticated():
+            return redirect(reverse('login'))
+        answer_form = AnswerForm(request.POST)
+        if answer_form.is_valid():
+            answer = answer_form.save(commit=False)
+            answer.question = Question.objects.get(pk=pk, slug=slug)
+            answer.author = request.user
+            answer.save()
+    else:
+        answer_form = AnswerForm()
 
     context = {
-        'question': get_object_or_404(Question, pk=pk, slug=slug)
+        'question': question,
+        'answer_form': answer_form,
+        'hide_answer_link': True,
+        'answered': question.is_answered(request.user),
     }
 
     return render_to_response('questions/question.html',
