@@ -7,7 +7,8 @@
 {% endif %}
     <div class="span8 pull-right">
         <div class="question">
-            {{ question.question }}
+            {# TODO: Verify if this is safe against custom tailored requests #}
+            {{ question.question|safe }}
         </div>
         <div class="question-meta">
             <a href="{{ question.get_absolute_url }}" class="iconic link" title="Permanent link to this question."></a>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 from quizzardous.utils import slugify
 from .utils import *
 
@@ -19,7 +20,7 @@ class Question(models.Model):
     class Meta:
         ordering = ['-when']
 
-    question = models.TextField()
+    question = RichTextField()
     # A slug is actually required, but if it's empty, then it'll automatically
     # be converted from question (see above)
     slug = models.SlugField(default='', blank=True)

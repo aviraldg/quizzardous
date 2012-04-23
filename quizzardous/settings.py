@@ -1,3 +1,4 @@
+import os
 from django.core.urlresolvers import reverse_lazy
 
 DEBUG = True
@@ -46,19 +47,11 @@ USE_I18N = True
 USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
-#
-# Doesn't make sense for us yet (we don't need uploaded files) and probably
-# wouldn't work without tweaking because files would be saved to the dyno's
-# local filesystem on Heroku
-MEDIA_ROOT = ''
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'uploads')
+
+# URL that handles the media served from MEDIA_ROOT.
 MEDIA_URL = ''
-
-import os
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -135,6 +128,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'tastypie',
     'crispy_forms',
+    'ckeditor',
     'questions',
     'users',
     'rankings',
@@ -200,3 +194,12 @@ AUTH_PROFILE_MODULE = 'users.UserProfile'
 QUESTIONS_PER_PAGE = 10
 
 USERS_PER_PAGE = 10
+
+# django-ckeditor
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Basic',
+    },
+}

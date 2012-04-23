@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     (r'^users/', include('users.urls')),
     (r'^questions/', include('questions.urls')),
     (r'^rankings/', include('rankings.urls')),
+    (r'^ckeditor/', include('ckeditor.urls')),
 )
 
 # only used in development environment (to serve static files)

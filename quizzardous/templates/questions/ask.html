@@ -2,10 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Ask Question.</h1>
-<form action="{% url ask_question %}" method="POST">
-{% csrf_token %}
-{{ form|crispy }}
-<input type="submit" class="btn btn-primary btn-large" value="Ask Question">
-</form>
+<h1 class="cursive">- Ask Question -</h1>
+<div>
+    <form action="{% url ask_question %}" method="POST">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary btn-large" value="Ask Question">
+    </form>
+</div>
 {% endblock %}
