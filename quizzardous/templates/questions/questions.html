@@ -7,12 +7,19 @@
         <a class="btn btn-primary" href="{% url ask_question %}">Ask Question</a>
         <div class="pull-right">
             <div class="btn-group">
-                <button class="btn btn-primary">Recent Questions</button>
+                <button class="btn btn-primary">
+                    {% if order == 'newest' %}
+                    Newest Questions
+                    {% else %}
+                    Oldest Questions
+                    {% endif %}
+                </button>
                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Recent Questions</a></li>
+                    <li><a href="{% url questions_page page=page %}?order=newest">Newest Questions</a></li>
+                    <li><a href="{% url questions_page page=page %}?order=oldest">Oldest Questions</a></li>
                 </ul>
             </div>
         </div>

@@ -12,12 +12,17 @@ from .forms import QuestionForm, AnswerForm
 def questions(request, page=None):
     '''Displays the list of questions.'''
 
-    if not page:
-        page = 1
+    page = 1 if page is None else page
+
+    order_dict = {
+        'newest': '-when',
+        'oldest': 'when'
+    }
 
     # TODO: This can't be hardcoded, has to be an option on the
     # sorting/filtering toolbar.
-    results = Question.objects.all().order_by('-when').select_related(
+    results = Question.objects.all().order_by(order_dict.get(
+        request.GET.get('order', 'newest'))).select_related(
         'author').prefetch_related('category', 'reporters', 'hearters')
     paginator = Paginator(results, settings.QUESTIONS_PER_PAGE)
 
@@ -27,6 +32,8 @@ def questions(request, page=None):
         'question_count': Question.objects.count(),
         'answer_count': Answer.objects.count(),
         'user_count': User.objects.count(),
+        'order': request.GET.get('order', 'newest'),
+        'page': page,
     }
 
     return render_to_response('questions/questions.html',
