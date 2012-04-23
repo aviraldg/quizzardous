@@ -1,6 +1,6 @@
 {% load usertags %}
 
-{% if question.reporters.count > 0 %}
+{% if question.reporters.exists %}
 <article class="question-container reported">
 {% else %}
 <article class="question-container">

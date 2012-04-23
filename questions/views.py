@@ -17,7 +17,8 @@ def questions(request, page=None):
 
     # TODO: This can't be hardcoded, has to be an option on the
     # sorting/filtering toolbar.
-    results = Question.objects.all().order_by('-when').select_related('author')
+    results = Question.objects.all().order_by('-when').select_related(
+        'author').prefetch_related('category', 'reporters', 'hearters')
     paginator = Paginator(results, settings.QUESTIONS_PER_PAGE)
 
     # TODO: IMPORTANT: The _count bits below *need* to be cached.
