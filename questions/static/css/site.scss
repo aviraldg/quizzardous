@@ -127,3 +127,11 @@ article {
 #id_answer {
 	width: 100% !important;
 }
+
+.navbar .nav > li > a.pending-reviews {
+	color: #9d261d !important;
+	
+	&:hover {
+		color: #f38264 !important;
+	}
+}

@@ -140,3 +140,46 @@ def ask(request):
     return render_to_response('questions/ask.html',
         {'form': form},
         RequestContext(request))
+
+@login_required
+def reviews(request):
+
+    # Ugly and counterintuitive, but possibly the best (+fastest) way to do it
+    # Basically: "Give me a list of all answers for questions whose author is
+    # the current user and which are not reviewed. Now, give me a list of all
+    # distinct questions whose answers are in the first list."
+    # We're interested in the latter.
+
+    if request.method == 'POST':
+
+        answer = Answer.objects.get(pk=request.POST.get('answer-pk'))
+        if not request.user.get_profile().can_edit(answer.question):
+            context = {
+                'error_message': '''It looks like you tried to review an answer
+                on someone else's question.'''
+            }
+
+            return render(request, '401.html', status=401, dictionary=context)
+        
+        correct = None
+        if 'mark-correct' in request.POST:
+            correct = True
+            answer.author.get_profile().add_monthly_score(settings.POINTS_PER_ANSWER)
+        elif 'mark-incorrect' in request.POST:
+            correct = False
+
+        # If correct is None, then the answer will be assumed as 'not reviewed'
+        answer.correct = correct
+        answer.save()
+    
+    answers_list = Answer.objects.filter(question__author = request.user,
+        correct=None)
+    questions_list = Question.objects.filter(answers__in=answers_list).distinct()
+
+    context = {
+        'questions_list': questions_list,
+    }
+
+    return render_to_response('questions/reviews.html',
+        context,
+        RequestContext(request))

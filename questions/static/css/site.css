@@ -87,3 +87,8 @@ article {
 
 #id_answer {
   width: 100% !important; }
+
+.navbar .nav > li > a.pending-reviews {
+  color: #9d261d !important; }
+  .navbar .nav > li > a.pending-reviews:hover {
+    color: #f38264 !important; }

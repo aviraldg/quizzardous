@@ -11,6 +11,13 @@ class UserProfile(models.Model):
     def can_edit(self, question):
         return self.user.is_staff or question.author == self.user
 
+    def add_monthly_score(self, value):
+        counter = ScoreCounter.objects.get_or_create(user=self.user,
+            when=get_current_month_datetime())[0]
+
+        counter.score += value
+        counter.save()
+
     def get_monthly_score(self):
         '''
         Gets the score from this month's ScoreCounter, or creates it if it

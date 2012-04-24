@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     (r'^$', redirect_to, {'url': 'questions'}, 'homepage'),
     (r'^users/', include('users.urls')),
     (r'^questions/', include('questions.urls')),
+    url(r'^reviews/', 'questions.views.reviews', name='reviews'),
     (r'^rankings/', include('rankings.urls')),
     (r'^ckeditor/', include('ckeditor.urls')),
 )
