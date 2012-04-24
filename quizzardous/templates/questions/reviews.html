@@ -24,5 +24,9 @@
     </div>
 </article>
 {% endfor %}
+{% empty %}
+<div class="alert alert-info">
+    <strong>Yay!</strong> You have no pending answer reviews! :) How about <a href="{% url ask_question %}">asking a few more questions?</a>
+</div>
 {% endfor %}
 {% endblock %}
