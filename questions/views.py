@@ -144,12 +144,6 @@ def ask(request):
 @login_required
 def reviews(request):
 
-    # Ugly and counterintuitive, but possibly the best (+fastest) way to do it
-    # Basically: "Give me a list of all answers for questions whose author is
-    # the current user and which are not reviewed. Now, give me a list of all
-    # distinct questions whose answers are in the first list."
-    # We're interested in the latter.
-
     if request.method == 'POST':
 
         answer = Answer.objects.get(pk=request.POST.get('answer-pk'))
@@ -171,6 +165,12 @@ def reviews(request):
         # If correct is None, then the answer will be assumed as 'not reviewed'
         answer.correct = correct
         answer.save()
+    
+    # Ugly and counterintuitive, but possibly the best (+fastest) way to do it
+    # Basically: "Give me a list of all answers for questions whose author is
+    # the current user and which are not reviewed. Now, give me a list of all
+    # distinct questions whose answers are in the first list."
+    # We're interested in the latter.
     
     answers_list = Answer.objects.filter(question__author = request.user,
         correct=None)
