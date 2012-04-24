@@ -50,6 +50,14 @@ def question(request, pk, slug):
         if not request.user.is_authenticated():
             return redirect(reverse('login'))
         answer_form = AnswerForm(request.POST)
+        if question.author == request.user:
+            context = {
+                'error_message': '''It looks like you tried answer your own
+                question. That isn't allowed.'''
+            }
+
+            return render(request, '401.html', status=401, dictionary=context)
+
         if answer_form.is_valid():
             answer = answer_form.save(commit=False)
             answer.question = Question.objects.get(pk=pk, slug=slug)
@@ -171,7 +179,7 @@ def reviews(request):
     # the current user and which are not reviewed. Now, give me a list of all
     # distinct questions whose answers are in the first list."
     # We're interested in the latter.
-    
+
     answers_list = Answer.objects.filter(question__author = request.user,
         correct=None)
     questions_list = Question.objects.filter(answers__in=answers_list).distinct()
