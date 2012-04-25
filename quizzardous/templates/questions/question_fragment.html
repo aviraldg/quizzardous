@@ -14,6 +14,7 @@
             <a href="{{ question.get_absolute_url }}" class="iconic link" title="Permanent link to this question."></a>
             <span class="badge">{{ question.category }}</span>
             (asked <abbr class="timestamp" title="{{ question.when.isoformat }}">{{ question.when }}</abbr> by <a href="{% url user_profile question.author.pk question.author.username %}">{{ question.author.username }}</a>)
+            {% if user.is_authenticated %}
             <div class="pull-right">
                 {% if not question.author == user %}
                 <form class="form-inline" style="display: inline;" method="post" action="{% url report_question question.pk question.slug %}">
@@ -32,6 +33,7 @@
                 <a href="{% url question question.pk question.slug %}" class="btn btn-small btn-success">Answer</a>
                 {% endif %}
             </div>
+            {% endif %}
         </div>
     </div>
     <ul class="thumbnails">
