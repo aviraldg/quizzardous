@@ -71,8 +71,10 @@ def question(request, pk, slug):
         'question': question,
         'answer_form': answer_form,
         'hide_answer_link': True,
-        'answered': question.is_answered(request.user),
     }
+
+    if request.user.is_authenticated():
+        answered = question.is_answered(request.user)
 
     return render_to_response('questions/question.html',
         context,

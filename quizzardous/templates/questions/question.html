@@ -2,6 +2,7 @@
 
 {% block content %}
 {% include "questions/question_fragment.html" %}
+{% if user.is_authenticated %}
 {% if not answered %}
 <form action="{% url question question.pk question.slug %}" method="POST">
 {% csrf_token %}
@@ -11,6 +12,11 @@
 {% else %}
 <div class="alert alert-info">
     <strong>You have answered this question.</strong> Please wait until someone reviews your answer.
+</div>
+{% endif %}
+{% else %}
+<div class="alert alert-info">
+    <strong>Please <a href="{% url login %}">login</a> to answer this question.</strong>
 </div>
 {% endif %}
 {% endblock %}
