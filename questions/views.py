@@ -196,3 +196,6 @@ def reviews(request):
     return render_to_response('questions/reviews.html',
         context,
         RequestContext(request))
+
+def about(request):
+    return render_to_response('meta_about.html', {}, RequestContext(request))

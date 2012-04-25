@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^reviews/', 'questions.views.reviews', name='reviews'),
     (r'^rankings/', include('rankings.urls')),
     (r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^meta/about', 'questions.views.about', name='meta_about'),
 )
 
 # only used in development environment (to serve static files)
