@@ -30,6 +30,13 @@
 				<div class="ad span3 pull-right">
 					{% include "ad_fragment.html" %}
 				</div>
+				{% if messages %}
+				<div class="span9">
+					{% for message in messages %}
+					<div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+					{% endfor %}
+				</div>
+				{% endif %}
 				{% block content_top %}
 				{% endblock %}
 				<div class="content span9">

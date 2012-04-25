@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.conf import settings
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
@@ -94,6 +95,7 @@ def delete_question(request, pk, slug):
 
     if user.is_authenticated() and user.get_profile().can_edit(question):
         question.delete()
+        messages.success(request, 'The question was deleted successfully.')
     else:
         context = {
             'error_message': '''It looks like you tried to delete someone else\'s
@@ -123,6 +125,7 @@ def report_question(request, pk, slug):
 
     if user.is_authenticated() and question.author != user:
         question.toggle_report(user)
+        messages.info(request, 'The question was reported successfully.')
     else:
         return render(request, 'questions/report_error.html', status=401)
     return redirect(request.GET.get('next', reverse('questions')))
