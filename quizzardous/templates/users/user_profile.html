@@ -9,10 +9,8 @@
     <table class="table">
         <caption>about</caption>
         <tr><td>email</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.email }}</a></td></tr>
-        <tr><td>age</td><td><a href="mailto:{{ target_user.email }}">{{ target_user.get_profile.get_age }}</a></td></tr>
         <tr><td>joined</td><td><abbr class="timestamp" title="{{ target_user.date_joined.isoformat }}">{{ target_user.date_joined }}</abbr> </td></tr>
     </table>
-    <h2>Recent Activity</h2>
 </div>
 <ul class="thumbnails">
     <div class="span2">
