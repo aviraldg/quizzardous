@@ -2,12 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<h1 class="cursive">- Register -</h1>
+<br />
 <form method="POST" action="{% url register %}">
-{% csrf_token %}
-{{ form|crispy }}
-
-{# HACK: This should actually be in users.forms, but for some reason crispy isn't rendering it there (probably because it's a ModelForm, in which case this is OK) #}
-<input class="btn btn-primary" type="submit" value="Register">
-
+    {% csrf_token %}
+    <div class="alert alert-info">
+    {{ form|crispy }}
+    <input class="btn btn-success btn-large" type="submit" value="Register">
+    </div>
 </form>
 {% endblock %}
