@@ -35,13 +35,16 @@ class UserProfile(models.Model):
         doesn't already exist.
         '''
 
+        now_month = get_current_month_datetime()
+
         counter = ScoreCounter.objects.get_or_create(user=self.user,
-            when=get_current_month_datetime())[0]
+            when=now_month)[0]
 
         # a User's rank is also essentially a count of how many Users have a
         # score greater than the current user + 1
 
-        return ScoreCounter.objects.order_by('-score').filter(score__gt=counter.score).count() + 1
+        return ScoreCounter.objects.order_by('-score').filter(when__gte=now_month,
+            score__gt=counter.score).count() + 1
 
 
 def create_user_profile(sender, instance, created, **kwargs):
