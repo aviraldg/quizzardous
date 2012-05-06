@@ -10,10 +10,10 @@ from django.conf import settings
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
 
-def questions(request, page=None):
+def questions(request, page=None, template_name='questions/questions.html'):
     '''Displays the list of questions.'''
 
-    page = 1 if page is None else page
+    page = page or 1
 
     order_dict = {
         'newest': '-when',
@@ -37,11 +37,11 @@ def questions(request, page=None):
         'page': page,
     }
 
-    return render_to_response('questions/questions.html',
+    return render_to_response(template_name,
         context,
         RequestContext(request))
 
-def question(request, pk, slug):
+def question(request, pk, slug, template_name='questions/question.html'):
     '''Displays a specific question. Also allows user to answer a question.'''
 
     answer_form = None
@@ -76,7 +76,7 @@ def question(request, pk, slug):
     if request.user.is_authenticated():
         context['answered'] = question.is_answered(request.user)
 
-    return render_to_response('questions/question.html',
+    return render_to_response(template_name,
         context,
         RequestContext(request))
 
@@ -133,7 +133,7 @@ def report_question(request, pk, slug):
     return redirect(request.GET.get('next', reverse('questions')))
 
 @login_required
-def ask(request):
+def ask(request, template_name='questions/ask.html'):
     '''
     Displays a form to ask a question and creates a new question if validated.
     '''
@@ -150,12 +150,12 @@ def ask(request):
     else:
         form = QuestionForm()
 
-    return render_to_response('questions/ask.html',
+    return render_to_response(template_name,
         {'form': form},
         RequestContext(request))
 
 @login_required
-def reviews(request):
+def reviews(request, template_name='questions/reviews.html'):
 
     if request.method == 'POST':
 
@@ -193,7 +193,7 @@ def reviews(request):
         'questions_list': questions_list,
     }
 
-    return render_to_response('questions/reviews.html',
+    return render_to_response(template_name,
         context,
         RequestContext(request))
 

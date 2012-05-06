@@ -5,7 +5,7 @@ from django.conf import settings
 from quizzardous.utils import get_current_month_datetime
 from .models import ScoreCounter
 
-def rankings(request):
+def rankings(request, template_name='rankings/rankings.html'):
 
     rankings = ScoreCounter.objects.filter(
         when=get_current_month_datetime()).select_related(
@@ -16,5 +16,5 @@ def rankings(request):
     # TODO: Allow rankings other than the top "N" to be seen?
     context = dict(rankings=paginator.page(1))
 
-    return render_to_response('rankings/rankings.html', context,
+    return render_to_response(template_name, context,
         RequestContext(request))
