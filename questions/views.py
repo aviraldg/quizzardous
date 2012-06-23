@@ -167,6 +167,14 @@ def reviews(request, template_name='questions/reviews.html'):
             }
 
             return render(request, '401.html', status=401, dictionary=context)
+
+        if not answer.correct is None:
+            context = {
+                'error_message': '''The answer you tried to review has already
+                been reviewed.'''
+            }
+
+            return render(request, '401.html', status=401, dictionary=context)
         
         correct = None
         if 'mark-correct' in request.POST:
@@ -185,8 +193,12 @@ def reviews(request, template_name='questions/reviews.html'):
     # distinct questions whose answers are in the first list."
     # We're interested in the latter.
 
-    answers_list = Answer.objects.filter(question__author = request.user,
+    if request.user.is_staff:
+        answers_list = Answer.objects.filter(correct=None)
+    else:
+        answers_list = Answer.objects.filter(question__author = request.user,
         correct=None)
+    
     questions_list = Question.objects.filter(answers__in=answers_list).distinct()
 
     context = {

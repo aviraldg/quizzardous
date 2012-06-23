@@ -8,6 +8,7 @@
 {% for question in questions_list %}
 {% include "questions/question_fragment.html" %}
 {% for answer in question.answers.all %}
+{% if answer.correct == None %}
 <article class="question-container">
     <div class="span8 pull-right">
         <div class="question">
@@ -23,6 +24,7 @@
         </form>
     </div>
 </article>
+{% endif %}
 {% endfor %}
 {% empty %}
 <div class="alert alert-info">
