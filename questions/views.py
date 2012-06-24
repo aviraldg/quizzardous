@@ -63,6 +63,21 @@ def question(request, pk, slug, template_name='questions/question.html'):
             answer = answer_form.save(commit=False)
             answer.question = Question.objects.get(pk=pk, slug=slug)
             answer.author = request.user
+
+            if Answer.objects.filter(question__pk=pk, author=request.user).exists():
+                context = {
+                    'error_message': 'You\'ve already answered this question and can\'t answer it again.'
+                }
+
+                return render(request, '401.html', status=401, dictionary=context)
+
+            canswer_strip = (''.join(c for c in question.correct_answer if c.isalnum())).lower()
+            answer_strip = (''.join(c for c in answer.answer if c.isalnum())).lower()
+            if answer_strip == canswer_strip:
+                answer.author.get_profile().add_monthly_score(settings.POINTS_PER_ANSWER)
+                answer.correct = True
+                messages.success(request, 'Woot! Your question was reviewed automatically and marked correct. +10 points')
+
             answer.save()
     else:
         answer_form = AnswerForm()
