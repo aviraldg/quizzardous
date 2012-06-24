@@ -1,9 +1,11 @@
 import unicodedata
 import re
 from datetime import datetime
+import bs4
 
 def slugify(value):
     value = unicode(value)
+    value = bs4.BeautifulSoup(value).text
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
     value = re.sub('[^\w-]', '', re.sub(' ', '-', value.strip().lower()))
     value = unicode(re.sub('-+', '-', value))
