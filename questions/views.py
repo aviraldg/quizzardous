@@ -90,6 +90,11 @@ def question(request, pk, slug, template_name='questions/question.html'):
 
     if request.user.is_authenticated():
         context['answered'] = question.is_answered(request.user)
+        context['answer'] = Answer.objects.filter(question__pk=pk, author=request.user)
+        if context['answer'].exists():
+            context['answer'] = context['answer'][0]
+        else:
+            del context['answer']
 
     return render_to_response(template_name,
         context,

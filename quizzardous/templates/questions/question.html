@@ -11,7 +11,16 @@
 </form>
 {% else %}
 <div class="alert alert-info">
+    {# Dirty hack, but it works. Looks like you can't compare None, True, etc #}
+    {% if answer.correct|default_if_none:"None" == "None" %}
     <strong>You have answered this question.</strong> Please wait until someone reviews your answer.
+    {% elif answer.correct %}
+    Your answer to this question, <em>"{{ answer }}"</em> was marked <strong>correct</strong>!
+    {% else %}
+    Your answer to this question, <em>"{{ answer }}"</em> was marked <strong>incorrect</strong>. :(
+    {% endif %}
+    <br />
+    <strong>The correct answer for this question is: </strong> {{ question.correct_answer }}
 </div>
 {% endif %}
 {% else %}
