@@ -1,7 +1,7 @@
 {% if user.is_authenticated %}
 <li>
     <a href="{% url user_profile user.pk user.username %}">
-        {% if user.is_staff %}<span class="staffuser">*</span>{% endif %}{{ user.username }}
+        {% if user.is_staff %}<span class="staffuser">*</span>{% endif %}{{ user.username }} ({{ user.get_profile.get_monthly_score }}, #{{ user.get_profile.get_monthly_rank }})
     </a>
 </li>
 <li class="dropdown">
