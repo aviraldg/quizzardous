@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from rankings.models import ScoreCounter
+from questions.models import Answer
 from quizzardous.utils import get_current_month_datetime
 
 class UserProfile(models.Model):
@@ -10,6 +11,14 @@ class UserProfile(models.Model):
 
     def can_edit(self, question):
         return self.user.is_staff or question.author == self.user
+
+    def has_pending_reviews(self):
+        if self.user.is_staff and Answer.objects.filter(correct=None).exists():
+            return True
+        elif Answer.objects.filter(question__author=self.user, correct=None).exists():
+            return True
+        else:
+            return False
 
     def add_monthly_score(self, value):
         counter = ScoreCounter.objects.get_or_create(user=self.user,

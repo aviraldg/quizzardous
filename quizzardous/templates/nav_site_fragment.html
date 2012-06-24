@@ -1,5 +1,5 @@
 <li><a href="{% url questions %}">Questions</a></li>
 <li><a href="{% url rankings %}">Rankings</a></li>
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.get_profile.has_pending_reviews %}
 <li><a href="{% url reviews %}" class="pending-reviews">Pending Reviews</a></li>
 {% endif %}
